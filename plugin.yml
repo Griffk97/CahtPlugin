@@ -1,0 +1,9 @@
+name: RegionBroadcast
+main: com.jetfan.plugin.RegionBroadcast.Main
+version: 0.9
+commands:
+   sayl:
+      description: This is a RangeBroadcast command
+      usage: /<command> [args]
+      permission: sayl.sayl
+      permission-message: You don't have permission.
