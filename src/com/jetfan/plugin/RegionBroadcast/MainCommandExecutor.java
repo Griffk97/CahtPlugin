@@ -35,7 +35,7 @@ public class MainCommandExecutor implements CommandExecutor{
 					int x = 0, y = 0, z = 0;
 					boolean xt = false, yt = false, zt = false;
 					Location loc2 = playing[i].getLocation();
-					double distance = loc.distance(loc2);
+					
 					double range=100;
 					try{
 					if(Double.valueOf(args[0]) != null){
@@ -47,7 +47,6 @@ public class MainCommandExecutor implements CommandExecutor{
 						
 					}
 					boolean brea=true;
-					do{
 					try{
 						if(Integer.valueOf(args[1]) != null){
 							x = Integer.valueOf(args[1]);
@@ -87,11 +86,14 @@ public class MainCommandExecutor implements CommandExecutor{
 					if(xt==true&&yt==true&&zt==true){
 						brea=false;
 					} else {
-						return false;
 					}
-					}  while(brea==true);
-					
+					if(brea==false){
+						loc=main.getServer().getWorlds().get(0).getBlockAt(x, y, z).getLocation();
+						
+					}
 					String str = "&3[Local] &r"+player.getDisplayName()+": &7";
+					
+					double distance = loc.distance(loc2);
 					if(distance<=range){
 						for (int a = b;a<args.length;a++) {
 							str=str.concat(args[a]).concat(" ");
