@@ -33,6 +33,7 @@ public class MainCommandExecutor implements CommandExecutor{
 					boolean xt = false, yt = false, zt = false;
 					Location loc2 = playing[i].getLocation();
 					double range=100;
+					if(args.length>=1){
 					try{
 					if(Double.valueOf(args[0]) != null){
 						range = Double.parseDouble(args[0]);
@@ -43,7 +44,9 @@ public class MainCommandExecutor implements CommandExecutor{
 					} catch(NullPointerException e){
 						
 					}
+					}
 					boolean brea=true;
+					if(args.length>=2){
 					try{
 							x = Integer.parseInt(args[1]);
 							b=b+1;
@@ -51,6 +54,8 @@ public class MainCommandExecutor implements CommandExecutor{
 						} catch(NumberFormatException e){
 							
 					}
+					}
+					if(args.length>=3){
 					try{
 							y = Integer.parseInt(args[2]);
 							b=b+1;
@@ -58,6 +63,8 @@ public class MainCommandExecutor implements CommandExecutor{
 						} catch(NumberFormatException e){
 							
 					} 
+					}
+					if(args.length>=4){
 					try{
 							z = Integer.parseInt(args[3]);
 							b=b+1;
@@ -65,6 +72,7 @@ public class MainCommandExecutor implements CommandExecutor{
 						} catch(NumberFormatException e){
 							
 					} 
+					}
 					if(x!=0){
 						xt=true;
 					}
@@ -84,13 +92,13 @@ public class MainCommandExecutor implements CommandExecutor{
 					}
 					String str = "&3[Local] &r"+player.getDisplayName()+": &7";
 					double distance;
-					if(loc.getWorld()==loc2.getWorld()){
+					if(loc.getWorld().equals(loc2.getWorld())){
 					distance = loc.distance(loc2);
 					} else {
 						distance = range+1;
 					}
-					
-					if(distance<=range){
+					if(!Double.isNaN(distance)){
+						if(distance<=range){
 						for (int a = b;a<args.length;a++) {
 							str=str.concat(args[a]).concat(" ");
 							
@@ -100,6 +108,7 @@ public class MainCommandExecutor implements CommandExecutor{
 						playing[i].sendMessage(str);
 						}
 						return true;
+						}
 					}
 				
 				
