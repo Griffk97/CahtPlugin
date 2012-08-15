@@ -1,7 +1,5 @@
 package com.jetfan.plugin.RegionBroadcast;
 
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -9,7 +7,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 public class MainCommandExecutor implements CommandExecutor{
-	List<String> set;
 	private Main main;
 
 	public MainCommandExecutor(Main main) {
@@ -35,45 +32,39 @@ public class MainCommandExecutor implements CommandExecutor{
 					int x = 0, y = 0, z = 0;
 					boolean xt = false, yt = false, zt = false;
 					Location loc2 = playing[i].getLocation();
-					
 					double range=100;
 					try{
 					if(Double.valueOf(args[0]) != null){
-						range = Double.valueOf(args[0]);
-						b=1;
-
+						range = Double.parseDouble(args[0]);
+						b=b+1;
 					}
 					} catch(NumberFormatException e){
+						
+					} catch(NullPointerException e){
 						
 					}
 					boolean brea=true;
 					try{
-						if(Integer.valueOf(args[1]) != null){
-							x = Integer.valueOf(args[1]);
-							b=2;
+							x = Integer.parseInt(args[1]);
+							b=b+1;
 							
-						}
 						} catch(NumberFormatException e){
 							
 					}
 					try{
-						if(Integer.valueOf(args[2]) != null){
-							y = Integer.valueOf(args[2]);
-							b=3;
+							y = Integer.parseInt(args[2]);
+							b=b+1;
 							
-						}
 						} catch(NumberFormatException e){
 							
-					}
+					} 
 					try{
-						if(Integer.valueOf(args[3]) != null){
-							z = Integer.valueOf(args[3]);
-							b=4;
+							z = Integer.parseInt(args[3]);
+							b=b+1;
 							
-						}
 						} catch(NumberFormatException e){
 							
-					}
+					} 
 					if(x!=0){
 						xt=true;
 					}
@@ -88,12 +79,17 @@ public class MainCommandExecutor implements CommandExecutor{
 					} else {
 					}
 					if(brea==false){
-						loc=main.getServer().getWorlds().get(0).getBlockAt(x, y, z).getLocation();
+						loc=player.getWorld().getBlockAt(x, y, z).getLocation();
 						
 					}
 					String str = "&3[Local] &r"+player.getDisplayName()+": &7";
+					double distance;
+					if(loc.getWorld()==loc2.getWorld()){
+					distance = loc.distance(loc2);
+					} else {
+						distance = range+1;
+					}
 					
-					double distance = loc.distance(loc2);
 					if(distance<=range){
 						for (int a = b;a<args.length;a++) {
 							str=str.concat(args[a]).concat(" ");
